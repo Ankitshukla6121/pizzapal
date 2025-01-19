@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<main>
+    <h2>Place Your Order</h2>
+    <form action="/order" method="POST">
+        <input type="text" name="customerName" placeholder="Your Name" required>
+        <select name="pizzaId" required>
+            <% pizzas.forEach(pizza => { %>
+                <option value="<%= pizza._id %>"><%= pizza.name %> - $<%= pizza.price %></option>
+            <% }) %>
+        </select>
+        <input type="text" name="address" placeholder="Your Address" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <button type="submit">Order Now</button>
+    </form>
+    <form action="/checkout" method="POST">
+        <input type="hidden" name="pizzaId" value="<%= pizza._id %>">
+        <input type="number" name="quantity" min="1" value="1" required>
+        <button type="submit">Pay Now</button>
+    </form>
+</main>
+<%- include('partials/footer') %>
